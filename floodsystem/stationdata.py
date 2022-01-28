@@ -1,7 +1,7 @@
 # Copyright (C) 2018 Garth N. Wells
 #
 # SPDX-License-Identifier: MIT
-"""This module provides interface for extracting statiob data from
+"""This module provides interface for extracting station data from
 JSON objects fetched from the Internet and
 
 """
@@ -44,7 +44,7 @@ def build_station_list(use_cache=True):
             typical_range = None
 
         try:
-            # Create mesure station object if all required data is
+            # Create measure station object if all required data is
             # available, and add to list
             s = MonitoringStation(
                 station_id=e['@id'],
