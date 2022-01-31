@@ -5,10 +5,13 @@
 geographical data.
 
 """
-#from .stationdata import build_station_list
+#from .stationdata import build_station_list  
+# ((stations(2,0)-p(0))**2 + (stations(2,1)-p(1))**2)**1/2
+#haversine(stations.coord,p)
 #from dis import _HaveCodeOrStringType
 from .utils import sorted_by_key  # noqa
 from .station import MonitoringStation
+from haversine import haversine
 
 #task 1B
 def stations_by_distance(stations,p):
@@ -24,3 +27,11 @@ def stations_by_distance(stations,p):
 #task 1C
 def stations_within_radius(stations, centre, r):
     station_distance = stations_by_distance(stations,centre)
+    stations_in = []
+    for i in station_distance:
+        if station_distance[1] <= r:
+            stations_in.append(stations.station_id)
+        else:
+            continue
+    return stations_in
+
