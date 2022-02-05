@@ -9,27 +9,35 @@ geographical data.
 # attempted alternative to haversine... ((stations(2,0)-p(0))**2 + (stations(2,1)-p(1))**2)**1/2
 #haversine(stations.coord,p)
 #from dis import _HaveCodeOrStringType
+#  # convert decimal degrees to radians 
+#        lon1, lat1, lon2, lat2 = map(radians, [station.coord(0), station.coord(1), p(0), p(1)])
+#        # haversine formula 
+#        dlon = lon2 - lon1 
+#        dlat = lat2 - lat1 
+#        a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
+#        c = 2 * asin(sqrt(a))
+#        distance = 2*6371*c # where 6371 is the radius of the earth
 from .utils import sorted_by_key  # noqa
 from .station import MonitoringStation
+from math import radians, cos, sin, asin, sqrt
 from haversine import haversine
 
 #task 1B
 def stations_by_distance(stations,p):
     station_name_distance = {}
-    for i in stations:
-        distance = ((stations(2,0)-p(0))**2 + (stations(2,1)-p(1))**2)**1/2
-        station_name_distance.append(stations.station_id, distance)
-    
+    for station in stations:
+        distance = haversine(station.coord,p)
+        station_name_distance.append(station.station_id, distance)
     sorted_by_key(station_name_distance,1)
     return station_name_distance
 
 
 #task 1C
 def stations_within_radius(stations, centre, r):
-    station_distance = stations_by_distance(stations,centre)
+    distance = stations_by_distance(stations,centre)
     stations_in = []
-    for i in station_distance:
-        if station_distance[1] <= r:
+    for station in distance:
+        if station.distance <= r:
             stations_in.append(stations.station_id)
         else:
             continue
@@ -46,8 +54,14 @@ def rivers_with_station(stations):
             river_list.append(all_rivers[i])
     return river_list
 
-def stations_by_river(stations):
+
+#def stations_by_river(stations):
     river_dict = {}
     for i in stations:
         if stations.river not in river_dict:
-            
+            river_dict[station.river] = [station.name]
+        else:
+            river_dict[station.river].append(station.name)
+            river_dict[station.river].sort()
+    return river_dict
+
