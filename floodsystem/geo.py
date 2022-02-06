@@ -52,21 +52,20 @@ def stations_within_radius(stations, centre, r):
 # Task 1D part 1
 def rivers_with_station(stations):
     river_list = []
-    all_rivers = [stations[3]]
-    for i in all_rivers:
-        if all_rivers[i] in river_list:
+    for station in stations:
+        if station.river in river_list:
             continue
         else:
-            river_list.append(all_rivers[i])
+            river_list.append(station.river)
     return river_list
 
 # Task 1D part 2
 def stations_by_river(stations):
     river_dict = {}
     for station in stations:
-        if stations.river not in river_dict:
-            river_dict[station.river] = [station.name]
-        else:
+        if station.river in river_dict:
             river_dict[station.river].append(station.name)
             river_dict[station.river].sort()
+        else:
+            river_dict[station.river] = [station.name]
     return river_dict
