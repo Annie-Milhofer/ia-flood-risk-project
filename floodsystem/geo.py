@@ -69,3 +69,51 @@ def stations_by_river(stations):
         else:
             river_dict[station.river] = [station.name]
     return river_dict
+
+# Task 1E
+def rivers_by_station_number(stations, N):
+    
+    #two lists with matching index
+    #containing river names and number of stations on that river
+    river_list = []
+    station_list = []
+    
+    for station in stations:
+        
+        #taking name of the river out from stations
+        temp = station.river
+
+        #checking if river_list is empty
+        #if river_list is empty, append temp directly
+        if len(river_list) == 0:
+            river_list.append(temp)
+            station_list.append(1)
+
+        #checking if river_list contains temp
+        #if river_list contains temp, modify number count of stations in station_list
+        #if river_list does not contain temp, append temp
+        else:
+            stat = True
+            for i in range(len(river_list)):
+                if river_list[i] == temp:
+                    station_list[i] += 1
+                    stat = False
+                    break
+            if stat:
+                river_list.append(temp)
+                station_list.append(1)
+
+    #create a list of tuples in form (river name, number of stations)
+    river_station_list = []
+    for i in range(len(river_list)):
+        river_station_list.append((river_list[i], station_list[i]))
+    river_station_list.sort(key = lambda t:t[1], reverse = True)
+
+    #trim the list into desired length
+    concat = river_station_list[0:N]
+    for i in range(N, len(river_station_list)):
+        if river_station_list[i][1] == concat[-1][1]:
+            concat.append(river_station_list[i])
+    return concat
+
+    
