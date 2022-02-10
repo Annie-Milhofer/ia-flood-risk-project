@@ -57,6 +57,7 @@ def rivers_with_station(stations):
             continue
         else:
             river_list.append(station.river)
+    river_list.sort()
     return river_list
 
 # Task 1D part 2
