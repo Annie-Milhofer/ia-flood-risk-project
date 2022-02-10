@@ -37,11 +37,6 @@ jobs:
       - name: Run Deliverable 1 code
         run: |
           python Task1A.py
-          python Task 1B.py
-          python Task 1C.py
-          python Task 1D.py
-          python Task 1E.py
-          python Task 1F.py
 
       - name: Run Deliverable 2 code
         run: |
