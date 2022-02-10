@@ -5,7 +5,7 @@ from floodsystem.station import MonitoringStation, inconsistent_typical_range_st
 def tests():
     """Tests for Task 1 function"""
 
-    #Tasks B&C - create 2 stations
+    #Task 1B - create 2 stations
     station_id = "Test station_id"
     measure_id = "Test measure_id"
     typical_range = (0, 1)
@@ -41,12 +41,11 @@ def tests():
 
     assert list1 == ["Station A"]
 
-    #Task 1D - create 4 test stations
+    #Tasks 1D & E - create 4 test stations
     station_id = "Test station_id"
     measure_id = "Test measure_id"
     river = "Test river"
     coord = (0.0, 0.0)
-    label = "Test label"
     town = "Test Town"
     typical_range = (0, 1)
     station1 = MonitoringStation(station_id, measure_id, "Station A", (0, 0), typical_range, "River A", town)
@@ -69,7 +68,6 @@ def tests():
 
     #test for N = 1, return most number of stations: A with 2
     assert x == [("River A", 2)]
-
     #test for N = 2, return most number of stations: A, B and C since they have the same number of stations
     assert y == [("River A", 2), ("River B", 1), ("River C", 1)]
 
