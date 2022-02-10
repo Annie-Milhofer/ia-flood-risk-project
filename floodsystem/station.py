@@ -41,6 +41,8 @@ class MonitoringStation:
 
     # Task 1F
     def typical_range_consistent(self):
+        if not isinstance(self.typical_range, tuple):
+            return False
         low, high = self.typical_range
         if low == None or high == None or high - low < 0:
             return False
@@ -50,5 +52,5 @@ def inconsistent_typical_range_stations(stations):
     list = []
     for station in stations:
         if station.typical_range_consistent() == False:
-            list.append(station)
+            list.append(station.name)
     return list
