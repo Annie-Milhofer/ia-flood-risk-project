@@ -1,9 +1,10 @@
+from floodsystem.flood import stations_highest_rel_level, stations_level_over_threshold
 from floodsystem.geo import stations_by_distance, haversine, stations_within_radius, rivers_with_station, stations_by_river, rivers_by_station_number
 from floodsystem.station import MonitoringStation, inconsistent_typical_range_stations
 
 
-def tests():
-    """Tests for Task 1 function"""
+def tests1():
+    """Tests for Task 1 functions"""
 
     #Task 1B - create 2 stations
     station_id = "Test station_id"
@@ -91,4 +92,31 @@ def tests():
     #D is inconsistent as it its typical_range is a string not a tuple
     assert test == ["Station B", "Station C", "Station D"]
 
-print(tests())
+
+def tests2():
+    """Tests for Task 2 functions"""
+    station_id = "Test station_id"
+    measure_id = "Test measure_id"
+    coord = (0, 0)
+    river = "Test river"
+    typical_range = (0.0,1.0)
+    town = "Test Town"
+    station1 = MonitoringStation(station_id, measure_id, "Station A", coord, typical_range, river, town)
+    station2 = MonitoringStation(station_id, measure_id, "Station B", coord, typical_range, river, town)
+    station3 = MonitoringStation(station_id, measure_id, "Station C", coord, typical_range, river, town)
+    station4 = MonitoringStation(station_id, measure_id, "Station D", coord, typical_range, river, town)
+    
+    #Task 2B
+    station1.latest_level = 0.1
+    station2.latest_level = 0.5   
+    station3.latest_level = 0.9
+    station4.latest_level = 0.99    
+    test = stations_level_over_threshold([station1, station2, station3, station4], 0.8)
+    assert test == [("Station D", 0.99), ("Station C", 0.9)]
+
+    #Task 2C
+    test = stations_highest_rel_level([station1, station2, station3, station4], 3)
+    assert test == [("Station D", 0.99), ("Station C", 0.9), ("Station B", 0.5)]
+
+print(tests1())
+print(tests2())

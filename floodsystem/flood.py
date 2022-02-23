@@ -14,7 +14,7 @@ def stations_level_over_threshold(stations, tol):
             water_level.append(value)
     
     station_flood_risk = list(zip(station_name,water_level))
-    station_flood_risk.sort(key = lambda tup:tup[1])
+    station_flood_risk.sort(key = lambda tup:tup[1], reverse = True)
     return station_flood_risk
 
 #task 2C
