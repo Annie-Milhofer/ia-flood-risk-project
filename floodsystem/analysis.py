@@ -1,5 +1,5 @@
 import numpy as np
-import matplotlib
+import matplotlib.dates
 
 #Task 2F
 def polyfit(dates, levels, p):
