@@ -112,11 +112,11 @@ def tests2():
     station3.latest_level = 0.9
     station4.latest_level = 0.99    
     test = stations_level_over_threshold([station1, station2, station3, station4], 0.8)
-    assert test == [("Station D", 0.99), ("Station C", 0.9)]
+    assert test == [(station4, 0.99), (station3, 0.9)]
 
     #Task 2C
     test = stations_highest_rel_level([station1, station2, station3, station4], 3)
-    assert test == [("Station D", 0.99), ("Station C", 0.9), ("Station B", 0.5)]
+    assert test == [(station4, 0.99), (station3, 0.9), (station2, 0.5)]
 
 print(tests1())
 print(tests2())
