@@ -12,5 +12,4 @@ def polyfit(dates, levels, p):
 def polyfit_coeff(dates, levels, p):
     dates_num = matplotlib.dates.date2num(dates)
     p_coeff = np.polyfit(dates_num - dates_num[0], levels, p)
-    print(p_coeff)
     return p_coeff
