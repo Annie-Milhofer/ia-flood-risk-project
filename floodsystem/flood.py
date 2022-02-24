@@ -3,24 +3,24 @@ from .utils import sorted_by_key
 #task 2B
 def stations_level_over_threshold(stations, tol):
     """returns a list of the stations with a flood risk over the tolerance"""
-    station_name = []
+    station_list = []
     water_level = []
     for station in stations:
         value = MonitoringStation.relative_water_level(station)
         if value == None:
             break
-        elif value >= 0.8:
-            station_name.append(station.name)
+        elif value >= tol:
+            station_list.append(station)
             water_level.append(value)
     
-    station_flood_risk = list(zip(station_name,water_level))
+    station_flood_risk = list(zip(station_list,water_level))
     station_flood_risk.sort(key = lambda tup:tup[1], reverse = True)
     return station_flood_risk
 
 #task 2C
 def stations_highest_rel_level(stations, N):
     """N stations with highest relative water levels"""
-    station_name = []
+    station_list = []
     water_level = []
     for station in stations:
         value = MonitoringStation.relative_water_level(station)
@@ -30,9 +30,8 @@ def stations_highest_rel_level(stations, N):
             break
 
         else:
-            station_name.append(station.name)
+            station_list.append(station)
             water_level.append(MonitoringStation.relative_water_level(station))
     
-    station_flood_risk = list(zip(station_name,water_level))
-    #station_flood_risk.sort(key = lambda tup:tup[1])
+    station_flood_risk = list(zip(station_list,water_level))
     return sorted_by_key(station_flood_risk, 1, reverse=True)[:N]
