@@ -9,7 +9,7 @@ def stations_level_over_threshold(stations, tol):
         value = MonitoringStation.relative_water_level(station)
         if value == None:
             break
-        elif value >= 0.8:
+        elif value >= tol:
             station_name.append(station.name)
             water_level.append(value)
     
