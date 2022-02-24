@@ -3,6 +3,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 from floodsystem.analysis import polyfit
 
+#Task 2E
 def plot_water_levels(station, dates, levels):
     
     # Plot water level curve
@@ -24,6 +25,7 @@ def plot_water_levels(station, dates, levels):
     plt.tight_layout()
     plt.show()
 
+#Task 2F
 def plot_water_level_with_fit(station, dates, levels, p, *, show_high_low_range = False, dot_like_original_data = True):
     
     # Plot typical high/low value range
