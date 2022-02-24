@@ -36,3 +36,22 @@ def stations_highest_rel_level(stations, N):
     station_flood_risk = list(zip(station_name,water_level))
     #station_flood_risk.sort(key = lambda tup:tup[1])
     return sorted_by_key(station_flood_risk, 1, reverse=True)[:N]
+
+#task 2E
+def stations_highest_rel_level_mod(stations, N):
+    """N stations with highest relative water levels"""
+    station_list = []
+    water_level = []
+    for station in stations:
+        value = MonitoringStation.relative_water_level(station)
+        if value == None:
+            break
+        elif MonitoringStation.typical_range_consistent(station) == False:
+            break
+
+        else:
+            station_list.append(station)
+            water_level.append(MonitoringStation.relative_water_level(station))
+    
+    station_flood_risk = list(zip(station_list,water_level))
+    return sorted_by_key(station_flood_risk, 1, reverse=True)[:N]
